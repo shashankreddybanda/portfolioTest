@@ -56,6 +56,35 @@ for (var i = 0; i < result.data.length; i++) {
       <div class="title">All Projects</div>
     </div>
     <Table projects={projects}/>
+    <a href="/portfolio/test" class="button"
+      >Test Page<svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="24"
+        height="24"
+        viewBox="0 0 24 24"
+        fill="none"
+      >
+        <path
+          d="M5 12H19"
+          stroke="#E4EFFF"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"></path>
+        <path
+          d="M12 5L19 12L12 19"
+          stroke="#E4EFFF"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"></path>
+      </svg></a
+    >
+    <label class="checkbox-container">Check me
+      <input type="checkbox">
+      <span class="checkmark"></span>
+    </label>
+    <img src="../../public/images/pexels-muhammet-cengi̇zov-19017576.jpg"/>
+    <img src="../../public/images/pexels-luke-miller-19068893.jpg"/>
+    <img src="../../public/images/QRCode.png"/>
   </div>
 </Layout>
 <style>
@@ -97,5 +126,32 @@ for (var i = 0; i < result.data.length; i++) {
     font-weight: 900;
     line-height: 2.1875rem; /* 97.222% */
     letter-spacing: 0.027rem;
+  }
+  .button-line {
+    display: flex;
+    padding: 0.625rem;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 0.625rem;
+    align-self: stretch;
+  }
+  .button {
+    display: flex;
+    padding: 0.5rem 1rem;
+    justify-content: center;
+    align-items: center;
+    gap: 0.5rem;
+    border-radius: 0.625rem;
+    background: var(--project-main-primary-500, #003587);
+    color: #fff;
+    font-size: 1.25rem;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 1.125rem; /* 90% */
+    letter-spacing: 0.015rem;
+    text-decoration: none;
+  }
+  img{
+    width: 500px;
   }
 </style>

@@ -1,0 +1,122 @@
+---
+import Layout from "../layouts/Layout.astro";
+import Table from "../components/Table.astro";
+import { Octokit } from "octokit";
+
+const octokit = new Octokit({
+    auth: import.meta.env.GITHUB_ACCESS_TOKEN,
+});
+
+var result = await octokit.request(
+    "GET /users/shashankreddybanda/repos?sort=created",
+    {
+        username: "USERNAME",
+        headers: {
+            "X-GitHub-Api-Version": "2022-11-28",
+        },
+    }
+);
+
+var projects = [];
+
+for (var i = 0; i < result.data.length; i++) {
+    if (!result.data[i].fork && !result.data[i].private)
+        projects.push({
+            name: result.data[i].name,
+            description: result.data[i].description,
+            year: JSON.stringify(result.data[i].created_at).slice(1, 5),
+            homePage: result.data[i].homepage,
+        });
+}
+var darkMode = false;
+---
+
+<Layout title="Shashank Reddy Banda">
+    <div class="main-section">
+        <h1 class="hi">This a test page</h1>
+        <p class="hero-text">For CSE565</p>
+        <a href="javascript:history.back()" class="back">
+            <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+            >
+                <path
+                    d="M21.5 12H5"
+                    stroke="#DB006A"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"></path>
+                <path
+                    d="M12 19L5 12L12 5"
+                    stroke="#DB006A"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"></path>
+            </svg>
+            <p class="portfolio">Portfolio</p>
+        </a>
+        <Table projects={projects} />
+        <label class="checkbox-container">Check me
+            <input type="checkbox">
+            <span class="checkmark"></span>
+          </label>
+        <img src="../../public/images/pexels-muhammet-cengi̇zov-19017576.jpg" />
+        <img src="../../public/images/pexels-luke-miller-19068893.jpg" />
+        <img src="../../public/images/QRCode.png" />
+    </div>
+</Layout>
+
+<style>
+    .main-section {
+        display: flex;
+        padding: var(--hero-top-padding, 8rem)
+            min(var(--main-padding, 8rem), 8vw);
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1.5rem;
+    }
+    .hi {
+        font-size: 5rem;
+        font-weight: 800;
+        margin: 0;
+        padding: 0;
+    }
+    .sha {
+        font-size: clamp(2rem, 4vw, 3rem);
+        font-weight: 700;
+        letter-spacing: 0.062em;
+        text-align: left;
+        background: linear-gradient(163deg, #225dba 0%, #f40076 100%);
+        background-clip: text;
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+    }
+    .hero-text {
+        padding: 0;
+        font-size: clamp(2rem, 4vw, 3rem);
+        font-weight: 100;
+        letter-spacing: 0.186rem;
+        margin: 0;
+    }
+    .back {
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        gap: 0.5rem;
+        text-decoration: none;
+    }
+    .portfolio {
+        color: var(--project-main-secondary-500, #db006a);
+        font-size: 1rem;
+        font-style: normal;
+        font-weight: 500;
+        line-height: 1rem; /* 100% */
+        letter-spacing: 0.012rem;
+    }
+    img {
+        width: 500px;
+    }
+</style>
